@@ -1,4 +1,6 @@
 #!/usr/bin/env Rscript
+# Kyle Gorman <kylebgorman@gmail.com>
+# 
 # Matches regular and irregular verbs on:
 # 
 # * log wordform frequency
@@ -10,8 +12,9 @@
 #
 # Thanks to Constantine Lignos for help with the ELP and SUBTLEXus data.
 
-library(ldamatch)
-library(plyr)
+suppressPackageStartupMessages(library(doMC))
+suppressPackageStartupMessages(library(ldamatch))
+suppressPackageStartupMessages(library(plyr))
 
 ELP_WORDS_MERGED <- "elp_words_merged.csv"
 ENGLISH_IRREGULARS <- "english_irregulars.csv"
@@ -42,17 +45,21 @@ get_elp <- function() {
 }
 
 # Main.
+doMC::registerDoMC(max(1, parallel::detectCores() - 1))
+
 d <- get_elp()
+
 # Small set of covariates, for testing.
-covariates <- with(d, cbind(sbtlx.freq, OLD))
+covariates <- with(d, sbtlx.freq)
 # Big set of covariates, what I really want to match on.
 #covariates <- with(d, cbind(sbtlx.freq, sbtlx.basefreq, sbtlx.pformbase,
 #                            OLD, length.squared, n.syll))
 
-# Match on whatever method works, favoring preserving irregulars.
-METHODS <- c("heuristic2", "heuristic3", "heuristic4", "random")
+# Match on whatever method works, favoring preserving irregulars (of which
+# there are many fewer).
+METHODS <- c("heuristic2", "heuristic3", "heuristic4")
 for (method in METHODS) {
-  is.in <- match_groups(d$irreg, covariates, halting_test=t_halt,
-                        props="irregular", method=method)
-  print(table(is.in))
+  match_groups(d$irreg, covariates, halting_test=t_halt,
+               props=c(irregular=.5, regular=.5), max_removed=c(irregular=0),
+               method=method)
 }
