@@ -33,8 +33,8 @@ get_elp <- function() {
   d <- subset(d, suffix == "ed" | word %in% irregulars)
   d <- with(d, data.frame(word=casefold(word),
                           root=casefold(root),
-                          irreg=as.factor(ifelse(word %in% irregulars,
-                                                 "irregular", "regular")),
+                          regularity=as.factor(ifelse(word %in% irregulars,
+                                                      "irregular", "regular")),
                           sbtlx.freq,
                           sbtlx.basefreq,
                           sbtlx.pformbase,
@@ -44,22 +44,18 @@ get_elp <- function() {
   d[complete.cases(d), ]
 }
 
-# Main.
 doMC::registerDoMC(max(1, parallel::detectCores() - 1))
-
 d <- get_elp()
-
 # Small set of covariates, for testing.
 covariates <- with(d, sbtlx.freq)
 # Big set of covariates, what I really want to match on.
 #covariates <- with(d, cbind(sbtlx.freq, sbtlx.basefreq, sbtlx.pformbase,
 #                            OLD, length.squared, n.syll))
-
-# Match on whatever method works, favoring preserving irregulars (of which
+# Matches on whatever method works, favoring preserving irregulars (of which
 # there are many fewer).
-METHODS <- c("heuristic2", "heuristic3", "heuristic4")
+METHODS <- c("heuristic2")
 for (method in METHODS) {
-  match_groups(d$irreg, covariates, halting_test=t_halt,
+  match_groups(d$regularity, covariates, halting_test=t_halt,
                props=c(irregular=.5, regular=.5), max_removed=c(irregular=0),
                method=method)
 }
