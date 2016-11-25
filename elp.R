@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 # Kyle Gorman <kylebgorman@gmail.com>
 #
-# Matches regular and irregular verbs on:
+# Setup for experiments matching regular and irregular verbs on:
 #
 # * log wordform frequency
 # * log lemma frequency
@@ -43,30 +43,3 @@ get_elp <- function() {
                           n.syll))
   d[complete.cases(d), ]
 }
-
-doMC::registerDoMC(max(1, parallel::detectCores() - 1))
-d <- get_elp()
-# Small set of covariates, for testing.
-covariates <- with(d, sbtlx.freq)
-# Big set of covariates, what I really want to match on.
-#covariates <- with(d, cbind(sbtlx.freq, sbtlx.basefreq, sbtlx.pformbase,
-#                            OLD, length.squared, n.syll))
-# Matches on whatever method works, favoring preserving irregulars (of which
-# there are many fewer).
-METHODS <- c("heuristic1")
-for (method in METHODS) {
-  l = match_groups(d$regularity, covariates, halting_test = t_halt,
-               method = method,
-               print_info = TRUE, use_test = TRUE,
-               max_removed = c(irregular = 0) # equivalent to: props = 'irregular'
-               )
-}
-
-# Why heuristic2, 3, and 4 are slow: These algorithms calculate
-# the p-value with all combinations of lookahead subjects removed
-# (where lookahead is 1 for heuristic2, and 2 by default for heuristic3 and 4).
-# Then remove one subject that seems to give the biggest improvement in p-value.
-# Then they re-calculate all p-values.
-# Perhaps they could be speeded up by removing multiple subjects at a time
-# when there are a large number of subjects and the p-values are very low below
-# the threshold.
