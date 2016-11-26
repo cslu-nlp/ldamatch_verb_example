@@ -19,6 +19,7 @@ covariates <- with(d, cbind(sbtlx.freq, sbtlx.basefreq, sbtlx.pformbase))
 # there are many fewer).
 method <- "heuristic4"
 l <- match_groups(d$regularity, covariates, halting_test = t_halt,
-                  method = method, print_info = TRUE, use_test = TRUE,
-                  max_removed = c(irregular = 0))
-write.csv(d[l,], paste0(method, ".csv")
+                  method = method, print_info = TRUE,
+                  lookahead = 1, max_removed = c(irregular = 0),
+                  max_removable_count_per_step = 100)
+write.csv(d[l,], paste0(method, ".csv"))
