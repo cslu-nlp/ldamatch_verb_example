@@ -31,15 +31,16 @@ get_elp <- function() {
   d <- subset(read.csv(ELP_WORDS_MERGED))
   # Possibly a past tense verb.
   d <- subset(d, suffix == "ed" | word %in% irregulars)
-  d <- with(d, data.frame(word = casefold(word),
-                          root = casefold(root),
-                          regularity = as.factor(ifelse(word %in% irregulars,
-                                                        "irregular", "regular")),
-                          sbtlx.freq,
-                          sbtlx.basefreq,
-                          sbtlx.pformbase,
-                          OLD,
-                          length.squared = length * length,
-                          n.syll))
+  d <- with(d, data.frame(
+      word = casefold(word),
+      root = casefold(root),
+      regularity = as.factor(
+          ifelse(word %in% irregulars, "irregular", "regular")),
+      sbtlx.freq,
+      sbtlx.basefreq,
+      sbtlx.pformbase,
+      OLD,
+      length.squared = length * length,
+      n.syll))
   d[complete.cases(d), ]
 }

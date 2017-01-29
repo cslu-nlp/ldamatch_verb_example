@@ -8,9 +8,9 @@ Results
 
 1. Heuristic 1: doesn't work (convergence failure).
 2. Heuristic 2: doesn't work (stack limit error).
-3. Heuristic 3: works and produces acceptable results.
-4. Heuristic 4 (bigbird22): running.
-5. Exhaustive (bigbird14): running; will take forever.
+3. Heuristic 3: produces good results (10/1203).
+4. Heuristic 4: produces good results
+5. Exhaustive (bigbird14): not feasible.
 
 TODO
 ====

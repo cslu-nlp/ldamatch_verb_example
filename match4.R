@@ -18,7 +18,8 @@ covariates <- with(d, cbind(sbtlx.freq, sbtlx.basefreq, sbtlx.pformbase))
 # Matches on whatever method works, favoring preserving irregulars (of which
 # there are many fewer).
 method <- "heuristic4"
-l <- match_groups(d$regularity, covariates, halting_test = t_halt,
+l <- match_groups(d$regularity, covariates, t_halt, lookahead = 1,
                   method = method, print_info = TRUE, use_test = TRUE,
-                  max_removed = c(irregular = 0))
+                  max_removed_per_cond = c(irregular= 63, regular = 3363),
+                  max_removed_per_step = 1)
 write.csv(d[l,], paste0(method, ".csv")
