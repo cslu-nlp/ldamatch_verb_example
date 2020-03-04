@@ -2,26 +2,26 @@ library(data.table)
 library(RUnit)
 
 source('elp.R')
-
+source('syllables.R')
 
 # SETTINGS
 
 #' paths
-DATA_FOLDER = '/g/kiss/src/acquired/ldamatch_verb_example'
+DATA_FOLDER <- '/g/kiss/src/acquired/ldamatch_verb_example'
 
 #' string constants for dataset
-DATASET_NAME = 'verbs'
-SUBJECT_COL = 'word'
-DX_COL = 'regularity'
+DATASET_NAME <- 'verbs'
+SUBJECT_COL <- 'word'
+DX_COL <- 'regularity'
 
 #' the actual dataset
-DATASET = as.data.table(get_elp())
-
+DATASET <- as.data.table(get_elp())
+overwrite_syllable_count(DATASET)
 
 # MATCHED TABLE PARAMETERS
 
 #' ERPA matched groups for parallel matching
-GROUPS = list(
+GROUPS <- list(
 
   small_set_of_covariates = list(
     props = list(c("irregular", "regular")),
@@ -50,7 +50,7 @@ GROUPS = list(
 # MATCHING ALGORITHM PARAMETERS
 
 #' Halting criteria
-MATCHING = list(
+MATCHING <- list(
   halting_test_name = c("t_halt"), # , "t_ad_halt", "t_ks_halt", "t_ad_ks_halt"
                       # "t_l_halt", "t_l_ad_halt", "t_l_ks_halt", "t_l_ad_ks_halt"
   thresh = c(0.2), # , 0.5,
@@ -64,7 +64,7 @@ MATCHING = list(
 # MAIN
 
 # create matching parameter tables
-l = GMatcher::create_param_tables_for_matching(
+l <- GMatcher::create_param_tables_for_matching(
     DATASET_NAME, DATASET, GROUPS, MATCHING, SUBJECT_COL, DX_COL)
 
 # save data
