@@ -12,6 +12,8 @@
 #
 # Thanks to Constantine Lignos for help with the ELP and SUBTLEXus data.
 
+# note that these libraries are not necessary 
+# for the operations in this file; they could be moved to match...R
 suppressPackageStartupMessages(library(doMC))
 suppressPackageStartupMessages(library(ldamatch))
 suppressPackageStartupMessages(library(plyr))
