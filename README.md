@@ -12,6 +12,18 @@ Results
 4. Heuristic 4: produces good results
 5. Exhaustive (bigbird14): not feasible.
 
+WORD PRONUNCIATIONS
+===================
+The verbs.tsv file contains all the verbs from 
+elp_words_merged.csv and english_irregulars.csv,
+sorted alphabetically.
+The verb_pronunciations.tsv contains the same verbs
+together with their pronunciations (separated by a tab character)
+created by https://tophonetics.com/
+Missing ones were taken from https://www.lexico.com/en/definition/abolish
+and https://www.macmillandictionary.com/dictionary/american/
+and made to confirm to other entries manually.
+
 TODO
 ====
 
