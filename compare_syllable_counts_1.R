@@ -1,10 +1,10 @@
 source('elp.R')
 library(data.table)
 
-p <- fread('verb_pronunciations.tsv', encoding = 'UTF-8', stringsAsFactors = FALSE)
+p <- fread('verb_pronunciations_1.tsv', encoding = 'UTF-8', stringsAsFactors = FALSE)
 data.table::setkey(p, 'word')
 
-v <- fread('vowels.tsv', encoding = 'UTF-8', stringsAsFactors = FALSE)
+v <- fread('vowels_1.tsv', encoding = 'UTF-8', stringsAsFactors = FALSE)
 
 d <- data.table::as.data.table(get_elp())
 d[, word := as.character(word)]

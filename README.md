@@ -17,7 +17,7 @@ WORD PRONUNCIATIONS
 The verbs.tsv file contains all the verbs from 
 elp_words_merged.csv and english_irregulars.csv,
 sorted alphabetically.
-The verb_pronunciations.tsv contains the same verbs
+The verb_pronunciations_1.tsv contains the same verbs
 together with their pronunciations (separated by a tab character)
 created by https://tophonetics.com/
 Missing ones were taken from https://www.lexico.com/en/definition/abolish

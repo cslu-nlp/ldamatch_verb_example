@@ -14,9 +14,9 @@
 
 # note that these libraries are not necessary 
 # for the operations in this file; they could be moved to match...R
-suppressPackageStartupMessages(library(doMC))
-suppressPackageStartupMessages(library(ldamatch))
-suppressPackageStartupMessages(library(plyr))
+# suppressPackageStartupMessages(library(doMC))
+# suppressPackageStartupMessages(library(ldamatch))
+# suppressPackageStartupMessages(library(plyr))
 
 ELP_WORDS_MERGED <- "elp_words_merged.csv"
 ENGLISH_IRREGULARS <- "english_irregulars.csv"

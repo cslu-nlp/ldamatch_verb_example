@@ -6,6 +6,9 @@ source('syllables.R')
 
 # SETTINGS
 
+#' pronuncations to use: 1 or 2
+PRONUNCIATION_SET = 1
+
 #' paths
 DATA_FOLDER <- '/g/kiss/src/acquired/ldamatch_verb_example'
 
@@ -15,8 +18,9 @@ SUBJECT_COL <- 'word'
 DX_COL <- 'regularity'
 
 #' the actual dataset
+stopifnot(PRONUNCIATION_SET %in% c(1, 2))
 DATASET <- as.data.table(get_elp())
-overwrite_syllable_count(DATASET)
+overwrite_syllable_count(DATASET, PRONUNCIATION_SET)
 
 # MATCHED TABLE PARAMETERS
 
