@@ -7,5 +7,6 @@ overwrite_syllable_count <- function(d, pronunciation_set) {
 
   v <- fread(paste0('vowels_', pronunciation_set, '.tsv'), encoding = 'UTF-8', stringsAsFactors = FALSE)
   vowel_pattern = paste0('(', paste(v[['vowel']], collapse = '|'), ')')
-  d[, n.syll := stringr::str_count(pronunciation, vowel_pattern)]
+  d[, n.syll2 := stringr::str_count(pronunciation, vowel_pattern)]
+  d[, n.syll = ifelse(n.syll2 > 0, n.syll2, n.syll)]
 }
