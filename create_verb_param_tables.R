@@ -4,10 +4,8 @@ library(RUnit)
 source('elp.R')
 source('syllables.R')
 
-# SETTINGS
 
-#' pronuncations to use: 1 or 2
-PRONUNCIATION_SET = 1
+# SETTINGS
 
 #' paths
 DATA_FOLDER <- '/g/kiss/src/acquired/ldamatch_verb_example'
@@ -18,9 +16,16 @@ SUBJECT_COL <- 'word'
 DX_COL <- 'regularity'
 
 #' the actual dataset
-stopifnot(PRONUNCIATION_SET %in% c(1, 2))
 DATASET <- as.data.table(get_elp())
-overwrite_syllable_count(DATASET, PRONUNCIATION_SET)
+
+# overwrite syllable count where new value increased: hopefully hiatus handled properly
+create_syllable_count(DATASET, 1)
+print(DATASET[n.syll2 > n.syll, .N])
+DATASET[, n.syll := ifelse(n.syll2 > n.syll, n.syll2, n.syll)]
+create_syllable_count(DATASET, 2)
+print(DATASET[n.syll2 > n.syll, .N])
+DATASET[, n.syll := ifelse(n.syll2 > n.syll, n.syll2, n.syll)]
+DATASET[, n.syll2 := NULL]
 
 # MATCHED TABLE PARAMETERS
 
