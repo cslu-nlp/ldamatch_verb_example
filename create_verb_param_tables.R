@@ -20,10 +20,8 @@ DATASET <- as.data.table(get_elp())
 
 # overwrite syllable count where new value increased: hopefully hiatus handled properly
 create_syllable_count(DATASET, 1)
-print(DATASET[n.syll2 > n.syll, .N])
 DATASET[, n.syll := ifelse(n.syll2 > n.syll, n.syll2, n.syll)]
 create_syllable_count(DATASET, 2)
-print(DATASET[n.syll2 > n.syll, .N])
 DATASET[, n.syll := ifelse(n.syll2 > n.syll, n.syll2, n.syll)]
 DATASET[, n.syll2 := NULL]
 
@@ -66,7 +64,7 @@ MATCHING <- list(
   max_removed_per_cond = list(
     # c(irregular = 0), # does not seem to find results
     c(irregular = 63, regular = 3363)), # at least 100 and 200 remaining
-  max_removed_per_step = c(1000)  # c(1, 10, 100, 1000)
+  max_removed_per_step = c(1, 10, 100)  # tried 1000: convergence failure
 )
 
 
