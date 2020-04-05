@@ -8,7 +8,7 @@ source('syllables.R')
 # SETTINGS
 
 #' paths
-DATA_FOLDER <- '/g/kiss/src/acquired/ldamatch_verb_example'
+DATA_FOLDER <- '/g/kiss/src/R/ldamatch_verb_example'
 
 #' string constants for dataset
 DATASET_NAME <- 'verbs'
