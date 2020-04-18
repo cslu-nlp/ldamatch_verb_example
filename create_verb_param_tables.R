@@ -63,8 +63,7 @@ MATCHING <- list(
   thresh = c(0.2), # , 0.5,
   max_removed_per_cond = list(
     # c(irregular = 0), # does not seem to find results
-    c(irregular = 63, regular = 3363)), # at least 100 and 200 remaining
-  max_removed_per_step = c(1, 10, 100)  # tried 1000: convergence failure
+    c(irregular = 63, regular = 3363)) # at least 100 and 200 remaining
 )
 
 
