@@ -31,21 +31,18 @@ DATASET[, n.syll2 := NULL]
 GROUPS <- list(
 
   small_set_of_covariates = list(
-    props = list(c("irregular", "regular")),
     halting_test_params = list(list(
       list(vars = c("sbtlx.freq"))
     ))
   ),
 
   medium_set_of_covariates = list(
-    props = list(c("irregular", "regular")),
     halting_test_params = list(list(
       list(vars = c("sbtlx.freq", "sbtlx.basefreq", "sbtlx.pformbase"))
     ))
   ),
 
   big_set_of_covariates = list(
-    props = list(c("irregular", "regular")),
     halting_test_params = list(list(
       list(vars = c("sbtlx.freq", "sbtlx.basefreq", "sbtlx.pformbase",
                     "OLD", "length.squared", "n.syll"))
@@ -61,6 +58,7 @@ MATCHING <- list(
   halting_test_name = c("t_halt"), # , "t_ad_halt", "t_ks_halt", "t_ad_ks_halt"
                       # "t_l_halt", "t_l_ad_halt", "t_l_ks_halt", "t_l_ad_ks_halt"
   thresh = c(0.2), # , 0.5,
+  prefer_test = FALSE,
   max_removed_per_cond = list(
     # c(irregular = 0), # does not seem to find results
     c(irregular = 63, regular = 3363)) # at least 100 and 200 remaining
