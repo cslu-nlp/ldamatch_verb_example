@@ -23,10 +23,4 @@ created by https://tophonetics.com/
 Missing ones were taken from https://www.lexico.com/en/definition/abolish
 and https://www.macmillandictionary.com/dictionary/american/
 and made to confirm to other entries manually.
-
-TODO
-====
-
-* Find good solutions: heuristic1 doesn't converge with the specs we're using; what does?
-* Match on the "big" set of covariates.
-* Improve the n.syll variable: it doesn't handle hiatus properly (i.e., it coutns "lion" as one syllable). The easiest solution here is to look up word pronunciations and count the number of phones which are vowels (which is equal to the number of syllables, naturally).
+We updated the n.syll variable by counting the number of phones which are vowels (which is equal to the number of syllables, naturally).
